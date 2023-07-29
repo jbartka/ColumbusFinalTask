@@ -10,7 +10,6 @@ table 50101 AutoSetupTable
             Caption = 'Primary Key';
             AutoIncrement = true;
             //Primary Key
-            //Pirminis raktas
         }
         field(2; CarNumberSeries; Code[20])
         {
@@ -18,33 +17,24 @@ table 50101 AutoSetupTable
             Caption = 'Automobilių numerių serija';
         }
 
-        field(3; Name; Text[100])
-        {
-            DataClassification = CustomerContent;
-            Caption = 'Aprašas';
-        }
-
-        field(4; RentalCardSeries; Code[20])
+        field(3; RentalCardSeries; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Nuomos kortelės serija';
-            //Relation - Location
-            //Susijimas - Vieta
         }
 
-        field(5; AttachmentLocation; Integer)
+        field(4; AttachmentLocation; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Priedų vieta';
-            //Relation - Location
-            //Susijimas - Vieta
+            TableRelation = Location;
         }
 
     }
 
     keys
     {
-        key(Code; PrimaryKey)
+        key(PK; PrimaryKey)
         {
             Clustered = true;
         }

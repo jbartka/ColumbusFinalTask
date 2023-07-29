@@ -8,15 +8,14 @@ table 50103 AutoModelTable
         {
             DataClassification = CustomerContent;
             Caption = 'Markės kodas';
+            TableRelation = AutoMarkTable;
             //Primary Key
-            //Pirminis raktas
         }
         field(2; CodeKey; Text[30])
         {
             DataClassification = CustomerContent;
             Caption = 'Kodas';
             //Secondary Key
-            //Antrinis raktas
         }
         field(3; Description; Text[30])
         {
@@ -27,18 +26,16 @@ table 50103 AutoModelTable
 
     keys
     {
-        key(Code; MarkKey)
+        key(PK; MarkKey)
         {
 
         }
-        key(CodeKey; CodeKey)
+        key(SK; CodeKey)
         {
 
         }
     }
 
-    var
-        myInt: Integer;
 
     trigger OnInsert()
     begin

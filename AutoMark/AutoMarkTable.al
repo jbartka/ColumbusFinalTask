@@ -4,12 +4,11 @@ table 50102 AutoMarkTable
 
     fields
     {
-        field(1; CodeKey; Text[30])
+        field(1; CodeKey; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Kodas';
             //Primary Key
-            //Pirminis raktas
         }
         field(2; Description; Text[30])
         {
@@ -21,7 +20,7 @@ table 50102 AutoMarkTable
 
     keys
     {
-        key(Code; CodeKey)
+        key(PK; CodeKey)
         {
             Clustered = true;
         }

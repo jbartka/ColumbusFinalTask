@@ -53,4 +53,22 @@ page 50104 AutoListPage
 
     var
         myInt: Integer;
+
+    trigger OnAfterGetRecord()
+    var
+        AutoModel: Record AutoModelTable;
+        FilterString: Text;
+    begin
+        if Rec.Get('Mark', AutoModel."MarkKey") then begin
+            // Construct the filter string based on the current record's "Mark" value and the related "MarkKey" value in AutoModelTable
+            FilterString := Format('Model="%1"', 100, AutoModel.MarkKey);
+
+            // Set the filter on the "Model" field to show only related records
+            Rec.SetFilter("Model", FilterString);
+        end
+        else begin
+            // If no matching record is found, remove the filter on the "Model" field to show all records
+            Rec.SetFilter("Model", '');
+        end;
+    end;
 }

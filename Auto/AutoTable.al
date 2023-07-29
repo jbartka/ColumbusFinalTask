@@ -1,7 +1,7 @@
+
 table 50104 AutoTable
 {
     DataClassification = CustomerContent;
-
     fields
     {
         field(1; Number; Integer)
@@ -21,44 +21,13 @@ table 50104 AutoTable
         {
             DataClassification = CustomerContent;
             Caption = 'Marke';
-            trigger OnValidate()
-            var
-                ModelOption: Record "AutoMarkTable";
-            begin
-                // Filter the options for "Model" based on the selected brand (Marke).
-                IF ModelOption.Description <> '' THEN BEGIN
-                    ModelOption.RESET;
-                    ModelOption.SETRANGE(ModelOption.Description, 'Modelis');
-                    IF ModelOption.FINDFIRST THEN
-                        Model := ModelOption.Description
-                    ELSE
-                        Model := '';
-                END ELSE BEGIN
-                    CLEAR(Model); // Reset Model if no Marke is selected.
-                END;
-            end;
+            TableRelation = AutoMarkTable;
         }
         field(4; Model; Text[30])
         {
             DataClassification = CustomerContent;
             Caption = 'Modelis';
-            trigger OnValidate()
-            var
-                ModelOption: Record "AutoModelTable";
-            begin
-                // Filter the options for "Model" based on the selected brand (Marke).
-                IF ModelOption.Description <> '' THEN BEGIN
-                    ModelOption.RESET;
-                    ModelOption.SETRANGE(ModelOption.Description, 'Modelis');
-                    IF ModelOption.FINDFIRST THEN
-                        Model := ModelOption.Description
-                    ELSE
-                        Model := '';
-                END ELSE BEGIN
-                    CLEAR(Model); // Reset Model if no Marke is selected.
-                END;
-            end;
-
+            TableRelation = AutoModelTable;
         }
         field(5; DateOfManufacture; Date)
         {
@@ -87,12 +56,14 @@ table 50104 AutoTable
             Caption = 'Nuomos paslauga';
             TableRelation = Resource;
         }
-        field(10; RentalPrice; Code[30])
+        field(10; RentalPrice; Decimal)
         {
             Caption = 'Nuomos kaina';
-            CalcFormula = lookup(AutoTable.RentalService);
+            CalcFormula = LOOKUP(Resource."Unit Cost" where("No." = field(RentalService)));
             FieldClass = FlowField;
         }
+
+
 
     }
 
@@ -126,5 +97,4 @@ table 50104 AutoTable
     begin
 
     end;
-
 }

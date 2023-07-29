@@ -17,12 +17,6 @@ page 50101 AutoSetupPage
                     ToolTip = 'Automobilių numerių serija';
                 }
 
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Aprašas';
-                }
-
                 field(RentalCardSeries; Rec.RentalCardSeries)
                 {
                     ApplicationArea = All;

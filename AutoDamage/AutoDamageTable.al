@@ -9,8 +9,6 @@ table 50107 AutoDamageTable
             DataClassification = CustomerContent;
             Caption = 'Automobilio Nr.';
             //Primary Key
-            //Pirminis raktas
-
         }
 
         field(2; LineNo; Integer)
@@ -18,7 +16,6 @@ table 50107 AutoDamageTable
             DataClassification = CustomerContent;
             Caption = 'Eilutės Nr.';
             //Primary Key
-            //Pirminis raktas
         }
 
         field(3; DateField; Date)
@@ -31,15 +28,13 @@ table 50107 AutoDamageTable
         {
             DataClassification = CustomerContent;
             Caption = 'Aprašas';
-            //Bus fiksuojamas pažeidimo aprašas
         }
 
         field(5; Status; Option)
         {
             DataClassification = CustomerContent;
             Caption = 'Statusas';
-            OptionMembers = "Aktualus=1; Pašalintas=2";
-            //Pasirinktinos reikšmės: Aktualus, Pašalintas
+            OptionMembers = "Aktualus=1","Pašalintas=2";
         }
     }
 
