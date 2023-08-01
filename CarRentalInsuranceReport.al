@@ -1,49 +1,96 @@
-// report 50114 CarRentalInsuranceReport
-// {
-//     dataset
-//     {
-//         dataitem(1; "AutoRentTable";
-//             AutoRentTable)
-//         {
-//             DataItemTableView = Table;
-//         }
-//         dataitem(2; "AutoRentLine";
-//             AutoRentLine)
-//         {
-//             DataItemTableView = FlowFilter;
-//             DataItemLink = "Document No." = FIELD(AutoRentLine.No);
-//         }
-//     }
+report 50119 CarInsuranceReport
+{
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
+    DefaultLayout = RDLC;
+    RDLCLayout = './FinalProject/CarInsuranceReport.rdl';
 
-//         repeater(AutoRentLine)
-//         {
-//             dataitem("Auto Rent Line")
-//             {
-//                 DataItemTableView = FlowFilter;
-//                 DataItemLink = "Document No." = FIELD("Auto Rent Header", "No.");
-//             }
-//         }
+    dataset
+    {
+        dataitem(AutoTable; AutoTable)
+        {
+            // Define columns to fetch data from the "Auto Rent Header" table
+            column(Number; Number) { }
+            column(Mark; Mark) { }
+            column(Model; Model) { }
+            column(RentalService; RentalService) { }
+            column(RentalPrice; RentalPrice) { }
+        }
 
-//         group(Summary)
-//         {
-//             field("Nuomos suma"; "Nuomos suma")
-//             {
-//                 DataItem = "Auto Rent Line";
-//                 Width = 15.0cm;
-//                 CalcFormula = "SUM("Amount")";
-//             }
-//             field("Bendra paslaugų suma"; "Bendra paslaugų suma")
-//             {
-//                 DataItem = "Auto Rent Line";
-//                 Width = 15.0cm;
-//                 CalcFormula = "SUM("Amount") WHERE "Type" = 2";
-//             }
-//             field("Bendra nuomos suma su paslaugomis"; "Bendra nuomos suma su paslaugomis")
-//             {
-//                 DataItem = "Auto Rent Line";
-//                 Width = 15.0cm;
-//                 CalcFormula = "SUM("Amount") WHERE "Type" = 1";
-//             }
-//         }
-//     }
-// }
+        dataitem(AutoRentLineTable; AutoRentLineTable)
+        {
+            // Define columns to fetch data from the "Auto Rent Line" table
+            column("Kiekis"; Quantity) { }
+            column("Kaina"; Price) { }
+            column("Suma"; Amount) { }
+        }
+    }
+
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                group(General)
+                {
+                    field(No; AutoTable.Number)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Marke; AutoTable.Mark)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Modelis; AutoTable.Model)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(RentalService; AutoTable.RentalService)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(RentalPrice; AutoTable.RentalPrice)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Quantity; AutoRentLineTable.Quantity)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Price; AutoRentLineTable.Price)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Amount; AutoRentLineTable.Amount)
+                    {
+                        ApplicationArea = All;
+                    }
+                }
+
+                group(Summary)
+                {
+                    // Field for "Bendra visų nuomų suma"
+                }
+            }
+        }
+
+        actions
+        {
+            area(processing)
+            {
+                action(PrintAction)
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+}

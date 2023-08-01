@@ -1,70 +1,96 @@
-// report 50119 CarInsuranceHistoryReport
-// {
-//     layout
-//     {
-//         group(General)
-//         {
-//             field("Automobilio Nr."; "Automobilio Nr.")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//             field("Marke"; "Marke")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//             field("Modelis"; "Modelis")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//         }
+report 50120 CarInsuranceHistoryReport
+{
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
+    DefaultLayout = RDLC;
+    RDLCLayout = './FinalProject/CarInsuranceHistoryReport.rdl';
 
-//         repeater(RentalHistory)
-//         {
-//             dataitem("Auto Rent Header")
-//             {
-//                 DataItemTableView = "Rental History Filter";
-//                 DataItemLink = "No." = FIELD("Auto Rent Header", "No.");
-//                 filters
-//                 {
-//                     filter("Data nuo"; "Data nuo") { };
-//                     filter("Data iki"; "Data iki") { };
-//                 }
-//             }
+    dataset
+    {
+        dataitem(AutoTable; AutoTable)
+        {
+            // Define columns to fetch data from the "Auto Rent Header" table
+            column(Number; Number) { }
+            column(Mark; Mark) { }
+            column(Model; Model) { }
+            column(RentalService; RentalService) { }
+            column(RentalPrice; RentalPrice) { }
+        }
 
-//             field("Data nuo"; "Data nuo")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//             field("Data iki"; "Data iki")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//             field("Kliento pavadinimas"; "Kliento pavadinimas")
-//             {
-//                 DataItem = "Auto Rent Header";
-//                 Width = 15.0cm;
-//             }
-//             field("Bendra Nuomos suma su paslaugomis"; "Bendra Nuomos suma su paslaugomis")
-//             {
-//                 DataItem = "Auto Rent Line";
-//                 Width = 15.0cm;
-//                 CalcFormula = "SUM(\"Amount\") WHERE \"Type\" = 1 AND \"Document No.\" = FIELD(\"Auto Rent Header\", \"No.\")";
-//             }
-//         }
+        dataitem(AutoRentLineTable; AutoRentLineTable)
+        {
+            // Define columns to fetch data from the "Auto Rent Line" table
+            column("Kiekis"; Quantity) { }
+            column("Kaina"; Price) { }
+            column("Suma"; Amount) { }
+        }
+    }
 
-//         group(Summary)
-//         {
-//             field("Bendra visų nuomų suma"; "Bendra visų nuomų suma")
-//             {
-//                 DataItem = "Auto Rent Line";
-//                 Width = 15.0cm;
-//                 CalcFormula = "SUM(\"Amount\") WHERE \"Document No.\" = FIELD(\"Auto Rent Header\", \"No.\")";
-//             }
-//         }
-//     }
-// }
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                group(General)
+                {
+                    field(No; AutoTable.Number)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Marke; AutoTable.Mark)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Modelis; AutoTable.Model)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(RentalService; AutoTable.RentalService)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(RentalPrice; AutoTable.RentalPrice)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Quantity; AutoRentLineTable.Quantity)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Price; AutoRentLineTable.Price)
+                    {
+                        ApplicationArea = All;
+                    }
+
+                    field(Amount; AutoRentLineTable.Amount)
+                    {
+                        ApplicationArea = All;
+                    }
+                }
+
+                group(Summary)
+                {
+                    // Field for "Bendra visų nuomų suma"
+                }
+            }
+        }
+
+        actions
+        {
+            area(processing)
+            {
+                action(PrintAction)
+                {
+                    ApplicationArea = All;
+                }
+            }
+        }
+    }
+}

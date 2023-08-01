@@ -9,7 +9,6 @@ table 50114 AutoRentDamageTable
             DataClassification = CustomerContent;
             Caption = 'Dokumento Nr.';
             //Primary Key
-            //Pirminis raktas
         }
 
         field(2; LineNo; Integer)
@@ -17,7 +16,6 @@ table 50114 AutoRentDamageTable
             DataClassification = CustomerContent;
             Caption = 'Eilutės Nr.';
             //Secondary Key
-            //Antrinis raktas
         }
 
         field(3; DateField; Date)

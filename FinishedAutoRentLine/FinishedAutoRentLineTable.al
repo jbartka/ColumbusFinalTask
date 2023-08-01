@@ -9,7 +9,6 @@ table 50117 FinishedAutoRentLineTable
             DataClassification = CustomerContent;
             Caption = 'Dokumento Nr.';
             //Primary Key
-            //Pirminis raktas
         }
 
         field(2; LineNo; Integer)
@@ -17,14 +16,13 @@ table 50117 FinishedAutoRentLineTable
             DataClassification = CustomerContent;
             Caption = 'Eilutės Nr.';
             //Secondary Key
-            //Antrinis raktas
         }
 
         field(3; TypeField; Option)
         {
             DataClassification = CustomerContent;
             Caption = 'Tipas';
-            OptionMembers = "Item=1; Resource=2";
+            OptionMembers = "Item=1","Resource=2";
 
             // trigger OnValidate()
             // var

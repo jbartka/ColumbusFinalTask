@@ -10,7 +10,6 @@ table 50104 AutoTable
             Caption = 'Nr.';
             AutoIncrement = true;
             //Primary Key
-            //Pirminis raktas
         }
         field(2; Name; Text[30])
         {

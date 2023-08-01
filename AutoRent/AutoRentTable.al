@@ -9,7 +9,6 @@ table 50108 AutoRentTable
             DataClassification = CustomerContent;
             Caption = 'Nr.';
             //Primary Key
-            //Pirminis raktas
         }
 
         field(2; CustomerNo; Code[20])
@@ -58,7 +57,7 @@ table 50108 AutoRentTable
         {
             DataClassification = CustomerContent;
             Caption = 'Būsena';
-            OptionMembers = "Atidaryta=1; Išduota=2";
+            OptionMembers = "Atidaryta=1","Išduota=2";
         }
     }
 

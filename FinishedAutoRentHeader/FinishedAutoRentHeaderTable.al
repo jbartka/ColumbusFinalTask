@@ -9,7 +9,6 @@ table 50115 FinishedAutoRentHeaderTable
             DataClassification = CustomerContent;
             Caption = 'Nr.';
             //Primary Key
-            //Pirminis raktas
         }
 
         field(2; CustomerNo; Code[20])

@@ -30,6 +30,36 @@ page 50104 AutoListPage
                 {
                     ApplicationArea = All;
                 }
+
+                field(DateOfManufacture; Rec.DateOfManufacture)
+                {
+                    ApplicationArea = All;
+                }
+
+                field(DateOfCivilInsurance; Rec.DateOfCivilInsurance)
+                {
+                    ApplicationArea = All;
+                }
+
+                field(TaExpiration; Rec.TaExpiration)
+                {
+                    ApplicationArea = All;
+                }
+
+                field(LocationCode; Rec.LocationCode)
+                {
+                    ApplicationArea = All;
+                }
+
+                field(RentalService; Rec.RentalService)
+                {
+                    ApplicationArea = All;
+                }
+
+                field(RentalPrice; Rec.RentalPrice)
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
@@ -60,14 +90,9 @@ page 50104 AutoListPage
         FilterString: Text;
     begin
         if Rec.Get('Mark', AutoModel."MarkKey") then begin
-            // Construct the filter string based on the current record's "Mark" value and the related "MarkKey" value in AutoModelTable
-            FilterString := Format('Model="%1"', 100, AutoModel.MarkKey);
-
-            // Set the filter on the "Model" field to show only related records
-            Rec.SetFilter("Model", FilterString);
+            Rec.SetFilter("Model", AutoModel.MarkKey);
         end
         else begin
-            // If no matching record is found, remove the filter on the "Model" field to show all records
             Rec.SetFilter("Model", '');
         end;
     end;
